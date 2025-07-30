@@ -1,13 +1,32 @@
-{%load static%}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nirmal and Django</title>
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-</head>
-<body>
-    <h1>Nirmal and Django</h1>
-</body>
-</html>
+{% extends 'website/base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <section class="hero">
+        <div class="container">
+            <h1>Welcome to My Django Project</h1>
+            <p>This is a modern, responsive homepage designed for your first Django project.</p>
+            <a href="#features" class="cta-button">Learn More</a>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="container">
+            <h2>Features</h2>
+            <div class="feature-cards">
+                <div class="card">
+                    <h3>Feature One</h3>
+                    <p>Description for the first amazing feature of your project. It's built with Django!</p>
+                </div>
+                <div class="card">
+                    <h3>Feature Two</h3>
+                    <p>Description for the second cool feature. You can customize this section easily.</p>
+                </div>
+                <div class="card">
+                    <h3>Feature Three</h3>
+                    <p>A third feature to showcase the power and flexibility of your application.</p>
+                </div>
+            </div>
+    </section>
+{% endblock %}
