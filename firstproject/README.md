@@ -259,3 +259,70 @@ A quick reference for the most common commands used in this project.
 | `npm run dev` | (In `theme/static_src`) Starts Tailwind in watch mode for development. |
 | `npm run build` | (In `theme/static_src`) Builds and minifies CSS for production. |
 
+---
+
+## 7. Adding the 'nirmal' App (Chai Varity)
+
+After the initial project and theme setup, a new app named `nirmal` was created to manage different varieties of chai.
+
+### a. Create the `nirmal` App
+A new app to handle chai-related logic was created.
+
+```bash
+python manage.py startapp nirmal
+```
+
+### b. Define the `ChaiVarity` Model
+A model was created in `nirmal/models.py` to store information about each chai variety. This model includes fields for the chai's name, an image, the date it was added, and its type (e.g., Masala, Ginger).
+
+### c. Configure `settings.py`
+The project's settings were updated to recognize the new app and handle media files for the `ImageField`.
+
+1.  **Add `nirmal` to `INSTALLED_APPS` in `firstproject/settings.py`**:
+    ```python
+    INSTALLED_APPS = [
+        # ... other apps
+        "nirmal",
+        # ...
+    ]
+    ```
+
+2.  **Configure Media Root and URL**: To handle image uploads for the `ChaiVarity` model.
+    ```python
+    # firstproject/settings.py
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+    ```
+
+### d. Create and Apply Database Migrations
+After defining the model, migrations are necessary to create the corresponding table in the database.
+
+1.  **Create migrations for the `nirmal` app**:
+    ```bash
+    python manage.py makemigrations nirmal
+    ```
+2.  **Apply the migrations to the database**:
+    ```bash
+    python manage.py migrate
+    ```
+
+### e. Register Model in the Django Admin
+To make the `ChaiVarity` model manageable through the Django admin interface, it was registered in `nirmal/admin.py`.
+
+### f. Create Views and URLs for the App
+Basic views and URL patterns were created inside the `nirmal` app in `nirmal/views.py` and `nirmal/urls.py`.
+
+### g. Include App URLs in Project
+Finally, the `nirmal` app's URLs were included in the main `firstproject/urls.py` file, and the media URL patterns were configured for development.
+
+```python
+# firstproject/urls.py
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns = [
+    # ... other urls
+    path('nirmal/', include('nirmal.urls')),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+```
+This setup ensures that any request to `/nirmal/...` is handled by the `nirmal` app and that media files are served correctly during development.
