@@ -13,6 +13,7 @@ class ChaiVarity(models.Model):
     image = models.ImageField(upload_to="chais/")
     date = models.DateTimeField(default=timezone.now)
     type = models.CharField(max_length=2, choices=CHAI_TYPE_CHIOCE)
+    desc=models.TextField(default="No description available")
 
 
     def __str__(self):

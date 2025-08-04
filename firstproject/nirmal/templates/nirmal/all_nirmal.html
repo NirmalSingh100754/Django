@@ -5,4 +5,23 @@ Nirmal app page
 
 {% block content %}
 <h1>nirmal app home page</h1>
+
+<div class="grid grid-cols-3 gap-4 m-4">
+{% for chai in chais  %}
+
+<div class="chai-item">
+    <img src="{{chai.image.url}}"  class="w-[200px] h-[200px]" alt="">
+    <h3>{{chai.name}}</h3>
+    <a href="{% url 'chai_desc' chai.id %}">
+    <Button
+    type="button"
+    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+    ">{{chai.type}} - {{chai.id}}</Button>
+</a>
+</div>
+
+{% endfor %}
+
+</div>
 {% endblock %}
+
